@@ -38,7 +38,7 @@ spec:
         -
           env:
             -
-              name: mongodb_ROOT_PASSWORD
+              name: MONGODB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mongodb
