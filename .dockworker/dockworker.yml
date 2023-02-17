@@ -9,7 +9,7 @@ dockworker:
     uuid: 3512
   deployment:
     environments:
-      - prod
+      - testing
     workflow:
       source: dockworker
       type: deployment-workflow
@@ -18,7 +18,7 @@ dockworker:
     owner: unb-libraries
   image:
     push_branches:
-      - prod
+      - testing
     name: ghcr.io/unb-libraries/cypress.mongodb.lib.unb.ca
     date_tag_image: true
     repository: ghcr

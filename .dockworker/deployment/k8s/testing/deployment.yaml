@@ -9,9 +9,9 @@ metadata:
     uri: cypress.mongodb.lib.unb.ca
     vcsOwner: unb-libraries
     vcsRepository: cypress.mongodb.lib.unb.ca
-    vcsRef: prod
+    vcsRef: testing
   name: cypress-mongodb-lib-unb-ca
-  namespace: prod
+  namespace: testing
 spec:
   selector:
     matchLabels:
@@ -30,7 +30,7 @@ spec:
         uri: cypress.mongodb.lib.unb.ca
         vcsOwner: unb-libraries
         vcsRepository: cypress.mongodb.lib.unb.ca
-        vcsRef: prod
+        vcsRef: testing
     spec:
       nodeSelector:
         deployenv: prod
@@ -38,7 +38,13 @@ spec:
         -
           env:
             -
-              name: MONGODB_ROOT_PASSWORD
+              name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: root-username
+            -
+              name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mongodb
@@ -48,13 +54,13 @@ spec:
           name: cypress-mongodb-lib-unb-ca
           ports:
             -
-              containerPort: 3306
+              containerPort: 27017
               name: mongodb
           volumeMounts:
             -
               mountPath: /data/db
               name: mongodb-persistent-storage
-      priorityClassName: vip-essential
+      priorityClassName: vip-support
       imagePullSecrets:
         -
           name: github-container-registry-auth
