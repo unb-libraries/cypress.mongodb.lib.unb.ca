@@ -33,7 +33,7 @@ spec:
         vcsRef: testing
     spec:
       nodeSelector:
-        deployenv: prod
+        deploy_prod: 'true'
       containers:
         -
           env:
