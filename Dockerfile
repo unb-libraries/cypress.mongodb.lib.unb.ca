@@ -1,7 +1,7 @@
 FROM mongo:6.0
 MAINTAINER UNB Libraries <libsupport@unb.ca>
 
-ENV TZ America/Moncton
+ENV TZ="America/Moncton"
 
 COPY ./build /build
 
