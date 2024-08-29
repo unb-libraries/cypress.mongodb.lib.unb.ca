@@ -1,24 +1,50 @@
 dockworker:
-  version: '5'
+  version: '6'
   application:
-    name: cypress.mongodb.lib.unb.ca
-    finish_marker: 'Waiting for connections'
-    project_prefix: IN
-    upstream_images:
-      - mongo:5.0
-    uuid: 3512
-  deployment:
-    environments:
+    name: MongoDB for E2E testing results at UNB Libraries
+    uri: https://cypress.mongodb.lib.unb.ca
+    description: >
+      A MongoDB for E2E testing results at UNB Libraries.
+    topics:
+      - mongodb
       - testing
-    workflow:
-      source: dockworker
-      type: deployment-workflow
-  github:
-    repo: cypress.mongodb.lib.unb.ca
-    owner: unb-libraries
-  image:
-    push_branches:
+    identifiers:
+      id: cypress.mongodb.lib.unb.ca
+      slug: cypress-mongodb-lib-unb-ca
+      short_slug: cypmong
+      uuid: 3512
+    framework:
+      name: MongoDB
+      version: 6
+      startup_finished_marker: 'Waiting for connections'
+      endpoint:
+        name: http
+        port: 27017
+        readiness_timeout: 15
+    license:
+      license: MIT
+      holder: University of New Brunswick Libraries
+    shell:
+      path: /bin/sh
+  endpoints:
+    env:
       - testing
-    name: ghcr.io/unb-libraries/cypress.mongodb.lib.unb.ca
-    date_tag_image: true
-    repository: ghcr
+    deployments:
+      cypress-mongodb-lib-unb-ca:
+        default: true
+        managed: true
+        name: cypress-mongodb-lib-unb-ca
+  workflows:
+    vcs:
+      type: github
+      owner: unb-libraries
+      name: cypress.mongodb.lib.unb.ca
+    jira:
+      project_keys:
+        - IN
+    image:
+      name: ghcr.io/unb-libraries/cypress.mongodb.lib.unb.ca
+      parent: mongo:6.0
+      repository: GitHub
+      push-branches:
+        - testing

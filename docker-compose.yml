@@ -1,11 +1,11 @@
 services:
-  cypress.mongodb.lib.unb.ca:
+  cypress-mongodb-lib-unb-ca:
     build:
       context: .
     env_file:
       - ./env/mongodb.env
     restart: unless-stopped
-    container_name: cypress.mongodb.lib.unb.ca
+    container_name: cypress-mongodb-lib-unb-ca
     expose:
       - "27017"
     volumes:
