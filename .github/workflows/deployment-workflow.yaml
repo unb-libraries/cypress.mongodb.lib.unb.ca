@@ -14,7 +14,6 @@ jobs:
       deploy-branches: '["testing"]'
       image-name: 'ghcr.io/unb-libraries/cypress.mongodb.lib.unb.ca'
       k8s-deployment-name: 'cypress-mongodb-lib-unb-ca'
-      push-branches: '["testing"]'
     secrets:
       KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
