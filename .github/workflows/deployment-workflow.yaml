@@ -1,19 +1,26 @@
 name: Deploy cypress.mongodb.lib.unb.ca
 
 on:
-  pull_request:
   push:
+    branches: [testing]
+  pull_request:
   workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   deploy:
-    uses: unb-libraries/dockworker/.github/workflows/build-push-deploy-notify.yaml@6.x
+    uses: unb-libraries/github-workflows/.github/workflows/build-push-deploy-notify.yaml@1.x
     with:
       branch-env-map: '{"testing":"testing"}'
-      build-themes: false
       deploy-branches: '["testing"]'
       image-name: 'ghcr.io/unb-libraries/cypress.mongodb.lib.unb.ca'
       k8s-deployment-name: 'cypress-mongodb-lib-unb-ca'
+      build-themes: false
+      check-logs: true
+      log-check-profile: 'generic'
     secrets:
       KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
